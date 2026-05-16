@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Rush - Earn Money Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            padding-bottom: 60px;
+        }
+
+        /* নেভিগেশন বার */
+        .navbar {
+            background-color: #161b22;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #30363d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar h1 span {
+            color: #00dfa2;
+        }
+
+        .navbar h1 i {
+            color: #ffbd59;
+        }
+
+        /* মেইন লেআউট কন্টেইনার */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        /* স্বাগতম বার্তা */
+        .welcome-box {
+            margin-bottom: 20px;
+        }
+
+        .welcome-box h2 {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .welcome-box p {
+            color: #8b949e;
+            font-size: 14px;
+        }
+
+        /* ড্যাশবোর্ড ওয়ালেট কার্ড */
+        .wallet-card {
+            background: linear-gradient(135deg, #1f2937, #111827);
+            border: 1px solid #374151;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wallet-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,223,162,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .wallet-card p {
+            font-size: 15px;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .balance-amount {
+            font-size: 40px;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .balance-amount i {
+            color: #ffbd59;
+            animation: pulse 2s infinite;
+        }
+
+        .taka-badge {
+            background-color: rgba(0, 223, 162, 0.15);
+            color: #00dfa2;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-block;
+            border: 1px solid rgba(0, 223, 162, 0.3);
+        }
+
+        /* সেকশন টাইটেল */
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* টাস্ক লিস্ট */
+        .task-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .task-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            padding: 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .task-card:hover {
+            transform: translateY(-2px);
+            background-color: #1c212c;
+            border-color: #00dfa2;
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .task-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+        }
+
+        .v-icon { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        .a-icon { background-color: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+
+        .task-details h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .task-details p {
+            font-size: 13px;
+            color: #8b949e;
+        }
+
+        .reward-badge {
+            background-color: rgba(255, 189, 89, 0.1);
+            color: #ffbd59;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 189, 89, 0.2);
+        }
+
+        /* পেমেন্ট সেকশন */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .payment-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            padding: 22px;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .payment-card:hover {
+            transform: scale(1.02);
+        }
+
+        .bkash-card:hover { border-color: #d12053; background-color: rgba(209, 32, 83, 0.05); }
+        .nagad-card:hover { border-color: #f6921e; background-color: rgba(246, 146, 30, 0.05); }
+
+        .payment-card i {
+            font-size: 26px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .bkash-card i { color: #d12053; }
+        .nagad-card i { color: #f6921e; }
+
+        .payment-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* টোস্ট নোটিফিকেশন */
+        .toast {
+            position: fixed;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #00dfa2;
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            box-sizing: border-box;
+            box-shadow: 0 10px 20px rgba(0, 223, 162, 0.3);
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            font-size: 14px;
+        }
+
+        .toast.show {
+            bottom: 30px;
+        }
+
+        /* অ্যানিমেশন */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1><i class="fa-solid fa-bolt"></i> Coin<span>Rush</span></h1>
+        <div style="font-size: 18px; color: #8b949e;"><i class="fa-regular fa-user-circle"></i></div>
+    </div>
+
+    <div class="container">
+        
+        <div class="welcome-box">
+            <h2>স্বাগতম, ইউজার! 👋</h2>
+            <p>বিজ্ঞাপন দেখুন এবং সহজেই আপনার কয়েন রিডিম করুন।</p>
+        </div>
+
+        <div class="wallet-card">
+            <p>বর্তমান ব্যালেন্স</p>
+            <div class="balance-amount">
+                <i class="fa-solid fa-coins"></i>
+                <span id="coin-counter">120</span>
+            </div>
+            <div class="taka-badge">টাকা: ৳<span id="taka-counter">12.00</span></div>
+        </div>
+
+        <h2 class="section-title"><i class="fa-solid fa-circle-play" style="color: #00dfa2;"></i> ডেইলি টাস্ক</h2>
+        <div class="task-grid">
+            
+            <div class="task-card" onclick="watchAd(25, 'প্রিমিয়াম ভিডিও অ্যাড')">
+                <div class="task-info">
+                    <div class="task-icon v-icon">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="task-details">
+                        <h3>প্রিমিয়াম ভিডিও অ্যাড</h3>
+                        <p>৩০ সেকেন্ডের ভিডিও দেখে বড় রিওয়ার্ড নিন</p>
+                    </div>
+                </div>
+                <div class="reward-badge">+২৫ কয়েন</div>
+            </div>
+
+            <div class="task-card" onclick="watchAd(10, 'স্পন্সরড ব্যানার অ্যাড')">
+                <div class="task-info">
+                    <div class="task-icon a-icon">
+                        <i class="fa-solid fa-rectangle-ad"></i>
+                    </div>
+                    <div class="task-details">
+                        <h3>স্পন্সরড ব্যানার অ্যাড</h3>
+                        <p>সহজ বিজ্ঞাপন দেখে কয়েন সংগ্রহ করুন</p>
+                    </div>
+                </div>
+                <div class="reward-badge">+১০ কয়েন</div>
+            </div>
+
+        </div>
+
+        <h2 class="section-title"><i class="fa-solid fa-wallet" style="color: #ffbd59;"></i> পেমেন্ট মেথড</h2>
+        <div class="payment-grid">
+            
+            <div class="payment-card bkash-card" onclick="triggerWithdraw('বিকাশ (bKash)')">
+                <i class="fa-solid fa-money-bill-wave"></i>
+                <h4>বিকাশ (bKash)</h4>
+            </div>
+
+            <div class="payment-card nagad-card" onclick="triggerWithdraw('নগদ (Nagad)')">
+                <i class="fa-solid fa-building-columns"></i>
+                <h4>নগদ (Nagad)</h4>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="toast-message" class="toast">🎉 সফলভাবে কয়েন যোগ হয়েছে!</div>
+
+    <script>
+        let totalCoins = 120;
+        const conversionRate = 0.10; // ১ কয়েন = ০.১০ টাকা (অর্থাৎ ১০ কয়েন = ১ টাকা)
+
+        // স্ক্রিন আপডেট করার ফাংশন
+        function updateDashboard() {
+            document.getElementById('coin-counter').innerText = totalCoins;
+            let currentTaka = (totalCoins * conversionRate).toFixed(2);
+            document.getElementById('taka-counter').innerText = currentTaka;
+        }
+
+        // অ্যাড দেখার লজিক
+        function watchAd(amount, adName) {
+            totalCoins += amount;
+            updateDashboard();
+
+            // কাস্টম নোটিফিকেশন টোস্ট দেখানো
+            let toast = document.getElementById('toast-message');
+            toast.innerText = `🎉 সফল! ${adName} থেকে +${amount} কয়েন পেয়েছেন!`;
+            toast.classList.add('show');
+
+            // ২.৫ সেকেন্ড পর টোস্টটি হাইড করা
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // উইথড্র বা টাকা তোলার লজিক
+        function triggerWithdraw(method) {
+            let currentTaka = (totalCoins * conversionRate).toFixed(2);
+            if (totalCoins < 500) {
+                alert(`দুঃখিত! সর্বনিম্ন উইথড্র লিমিট ৫০০ কয়েন (৳৫০)। আপনার বর্তমান ব্যালেন্স ৳${currentTaka}।`);
+            } else {
+                let walletNumber = prompt(`আপনার ${method} অ্যাকাউন্ট নম্বরটি দিন:`);
+                if (walletNumber) {
+                    alert(`অনুরোধ সফল হয়েছে!\nআপনার নম্বর: ${walletNumber}\n৳${currentTaka} আগামী ২৪ ঘণ্টার মধ্যে আপনার অ্যাকাউন্টে পাঠিয়ে দেওয়া হবে।`);
+                    totalCoins = 0; // উইথড্র করার পর পয়েন্ট শূন্য হবে
+                    updateDashboard();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
